@@ -1,0 +1,4 @@
+Flask-SQLAlchemy
+Flask-WTF
+sqlalchemy_utils 
+phonenumbers

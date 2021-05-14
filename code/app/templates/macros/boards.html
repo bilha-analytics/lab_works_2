@@ -1,0 +1,53 @@
+{% import 'macros/listers.html' as LISTERZ %}
+{% import 'macros/body.html' as BODYZ %}
+
+{% macro edit_page_listitem(img_src, edit_url, del_url ) %} 
+    <div class=""> 
+        {{ LISTERZ.image_clickable_item( img_src, edit_url ) }}  
+        <div class=""> 
+            <button type="button" class="badge badge-danger " data-toggle='modal' data-target="#{{del_url}}"> 
+                Remove
+            </button>   
+            {{ LISTERZ.a_button('Edit', 
+                    edit_url,
+                    a_class='badge badge-success ' ) }} 
+        </div> 
+    </div> 
+{% endmacro %}
+
+
+{% macro adboard_listitem(img_src, a_href, 
+    name=None, description=None,
+    img_class=None ) %}
+    <a href="{{a_href}}"> 
+        <div class=""> 
+            <img src="{{img_src}}" class="{{ img_class }}" />
+            {% if name or description %}
+                {% if name %}<h4> {{ name }} </h4> {% endif %}
+                {% if description %}<p> 
+                    {{ description }} 
+                    <a role="button" class="badge badge-info" href="{{a_href}}">create with</a></p> 
+                {% endif %}
+            {% endif %}            
+        </div> 
+    </a>
+{% endmacro %}
+
+
+
+
+
+
+{% macro ctx_edit_page_listitem(img_src, edit_url, del_url ) %} 
+    {% call BODYZ.make_containing_div(div_class='bg-warning') %}
+        {{ LISTERZ.image_clickable_item( img_src, edit_url ) }}  
+        {% call BODYZ.make_containing_div(div_class='listers') %} 
+            {{ LISTERZ.a_button('Remove', 
+                    del_url,
+                    a_class='badge badge-danger ' ) }}
+            {{ LISTERZ.a_button('Edit', 
+                    edit_url,
+                    a_class='badge badge-success ' ) }} 
+        {% endcall %}
+    {% endcall%} 
+{% endmacro %}

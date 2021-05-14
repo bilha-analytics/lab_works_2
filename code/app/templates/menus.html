@@ -1,0 +1,49 @@
+
+{% set BROWSE_USER_ID = 1 %}
+
+{% set BASE_MENUS = [
+    ('Home', url_for('main.home') ),     
+    ]    
+%}
+
+{% set TABS_MENUS = [
+    ('Create', url_for('main.home') ),    
+    ('Browse', url_for('main.browse')  ) 
+    ]    
+%}
+
+{% set MY_POSTS = [
+    ('Create', url_for('main.home') ),    
+    ('My Posts', url_for('main.browse_user', id=BROWSE_USER_ID )  ) 
+    ]    
+%}
+
+{% set PUBLIC_MENUS = [
+    ('Share', url_for('main.share_app') )
+    ]    
+%}
+
+{% set ABOUTS_MENUS = [ 
+    ('About', url_for( 'main.about' ) ),
+    ('Contacts', url_for( 'main.about' )+'#contacts' )
+    ]    
+%}
+
+{% set PRIVATE_MENUS = [
+    ('My Posts', url_for('main.browse', id=0) ),
+    ('My Account', url_for('users.account') ),
+    ('Logout',  url_for('users.logout') ),
+    ]    
+%}
+
+{% set JOIN_MENUS = [
+    ('Register',  url_for('users.register') ),
+    ('Login',  url_for('users.login') ),
+    ]    
+%}
+
+{% set tab_pages = [
+    ('Create', '#createBoard'),
+    ('Browse', '#browseBoard')
+    ]
+%}

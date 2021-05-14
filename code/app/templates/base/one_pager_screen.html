@@ -1,0 +1,46 @@
+{% extends 'base/app_layout.html' %} 
+
+{% import 'macros/body.html' as BODYZ %}
+
+{% set SCREEN_MENUZ = [
+    ('Home', url_for('main.home') ), 
+    ('About', '#about'),
+    ('Terms', '#terms'),
+    ('Contacts', '#contacts'),
+    ] %}
+
+{% set sectionz = [
+    ('About', None, "SOmething something something @ relevant include call "),     
+    ('Terms', None, "SOmething something something "), 
+    ('Contacts', None, "SOmething something something "), 
+    ]
+%}
+
+
+{% block body %}
+
+{% call BODYZ.make_containing_div(id='top', div_class='onepager' ) %}
+    <nav> {% include 'base/navigation.html' %} </nav>
+
+
+    {% for header, footer, main in sectionz %}
+
+        {% call BODYZ.make_section( SCREEN_MENUZ[loop.index][1][1:], 
+            header=header, 
+            footer=footer,
+            sxn_class="section-container"
+             ) %}
+            <p> {{ main }} </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi sapiente eius similique molestias dolores, numquam modi. Error dignissimos, numquam voluptatem molestias autem sed excepturi et, magni minus dolor accusamus voluptates.</p>
+        {% endcall %}
+
+        {% if not loop.last %}
+            <a href="{{ SCREEN_MENUZ[loop.index + 1][1] }}"><i class="fa fa-get-pocket"></i></a>
+        {% else %}
+            <a href="#top"><i class="fa fa-home"></i></a>
+        {% endif %}
+    {% endfor %}
+
+{% endcall %}
+
+{% endblock %}

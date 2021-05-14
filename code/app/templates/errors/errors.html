@@ -1,0 +1,15 @@
+{% extends 'base/standard_screen.html' %}
+
+{% import 'macros/body.html' as BODYZ %}
+
+{% import 'menus.html' as MENUZ %}
+
+{% set SCREEN_MENUZ = MENUZ.BASE_MENUS %}
+
+{% block main %}
+    {% call BODYZ.make_containing_div() %}
+
+        {% block errorbody %} {% endblock %}
+        
+    {% endcall %}
+{% endblock %}

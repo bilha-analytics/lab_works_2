@@ -1,0 +1,27 @@
+{% extends 'base/app_layout.html' %} 
+
+{% set APP_TITLE = "Go AdSnap!!" %}
+
+{% block body %}
+<!-- section -->
+<section class='base_screen'>
+
+    <!-- header -->
+    <header>
+        {% include 'base/navigation.html' %}
+        {% block header %}{% endblock%}        
+    </header>
+
+    <!-- main -->
+    <main> 
+        {% include 'base/notifications.html' %}
+        {% block main %} {% endblock %}
+    </main>
+
+    <!-- footer -->
+    <footer> 
+        {% block footer%} {% endblock %}
+    </footer>
+    
+</section> 
+{% endblock %}

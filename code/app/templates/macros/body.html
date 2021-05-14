@@ -1,0 +1,43 @@
+{% macro make_section(
+    id,
+    header=None,
+    footer=None, 
+    sxn_class=None,
+    h1_class="section-h1",
+    is_last=False,
+    sxn_i_ref=None
+    ) %}
+<section id="{{id}}" class="{{sxn_class}}">
+    {% if header %} <header> <h1 class="{{h1_class}}"> {{ header }} </h1> </header> {% endif %}
+    
+    {# main goes here #}
+    {{ caller() }}
+
+    {% if footer %} <footer> {{ footer }} </footer> {% endif %}
+
+    {# TODO: chuck this #}
+    {% if not is_last %}
+        <a class="section-next" href="{{ sxn_i_ref }}"><i class="fa fa-chevron-down"></i></a>
+    {% else %}
+        <a class="section-prev" href="{{sxn_i_ref}}"><i class="fa fa-home"></i></a>
+    {% endif %}
+</section>
+
+{% endmacro %}
+
+
+{% macro make_containing_div(
+    id=None,
+    div_class=None) 
+    %}
+    <div {% if id%} id="{{id}}" {% endif %} {% if div_class %} class="{{div_class}}" {% endif %}>
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+
+{% macro make_noop( msg=None ) %}
+    <H5> Empty </H5>
+    <p> Nothing to share at the moment. </p>
+    {% if msg %}<p> {{ msg }} </p>{% endif %}
+{% endmacro %}

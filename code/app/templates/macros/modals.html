@@ -1,0 +1,39 @@
+
+<!-- ==== Modals ==== -->
+{% macro modal_button(target_id,   
+    label=None, 
+    fa_icon=None,  
+    btn_style="btn btn-primary") %}
+    <button type="button" class="{{btn_style}}" data-toggle='modal' data-target="#{{target_id}}"> 
+        {% if fa_icon %}<i class="fa fa-{{fa_icon}}"></i> {% endif %} {% if label %} {{ label }} {% endif %} 
+    </button>    
+{% endmacro %}
+
+
+
+{% macro make_modal( id, title=None, footer=None, h='300' ) %} 
+    {% set H = h | int %} 
+    <div class="modal fade p-0", id="{{id}}" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" style="overflow-y: initial !important;" role="document">
+            <div class="modal-content">                
+                <div class="modal-header">
+                    {% if title %}    
+                    <h4 class="modal-title"> {{ title }} </h4>
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal"> &times; </button>
+                </div>
+
+                <div class="modal-body shadow" style="height: {{H}}px; overflow-y: auto;">
+                    {{ caller() }}
+                </div>
+                {% if footer %} 
+                <div class="modal-footer">
+                    {{ footer }}
+                    <a class="close" data-dismiss="modal" role='button'> X close </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+

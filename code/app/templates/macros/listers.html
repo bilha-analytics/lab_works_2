@@ -1,0 +1,105 @@
+
+{% macro image_clickable_item( 
+    img_src, 
+    a_href, 
+    footnote=None,
+    div_class=None,
+    img_class=None,
+    a_class=None, 
+    w=None, h=None
+    )%}
+
+    <div class="{{ div_class }}">
+        <a class="{{ a_class }}" href="{{a_href}}">
+            <img src="{{img_src}}" class="{{ img_class }}" />
+            {% if footnote %}<br/><small class="">{{ footnote }}</small> {% endif %}
+        </a>
+    </div>
+
+{% endmacro %}
+
+
+{% macro a_button( name, a_href, 
+    a_class=None,
+    fa_icon=None) %}
+    <a class="{{a_class}}" href="{{a_href}}" role='button'> 
+    {% if fa_icon %}<i class="fa fa-{{fa_icon}}"></i>{% endif%}
+    {{ name }}</a>
+{% endmacro %}
+
+
+
+
+{% macro make_carousel( n_items, id="menuCreate", w='300', h='400') %}
+    {% set W = w | int %} 
+    {% set H = h | int %} 
+
+<div id="{{id}}" class="carousel slide center mx-auto bg-dark shadow rounded pl-5 pr-5 pt-3" data-ride="carousel" > <!-- style="width:{{W}}px; height: {{H}}px;" -->
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        {% for n in range(n_items) %}
+            {% if n == 0 %}
+                <li data-target="#{{id}}" data-slide-to="{{n}}" class="active">
+            {% else %}
+                <li data-target="#{{id}}" data-slide-to="{{n}}"> 
+            {% endif %}
+                </li>
+        {% endfor %}       
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner justify-content-center">
+        {{ caller() }}
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#{{id}}" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#{{id}}" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
+{% endmacro %}
+
+
+
+
+{% macro make_carousel_item(is_active=False) %}
+    {% set styler="carousel-item border border-3 border-dark shadow rounded" %}
+    {% if is_active %}    
+    <div class="{{styler}} active "> 
+    {% else %}
+    <div class="{{styler}} "> 
+    {% endif %}
+        {{ caller() }} 
+    </div>
+{% endmacro %}
+
+
+
+<!-- pagination navitor -->
+{% macro make_paginator_nav( pages=None, url_fx='main.browse') %}
+    <div class="mt-3">
+    {% if pages %}
+    {% for pg_num in pages.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if pg_num %}
+                {% if pg_num == pages.page %}
+                <a href="{{ url_for(url_fx, page=pg_num) }}" 
+                    class="btn btn-info mb-4"> {{ pg_num }} </a>        
+                {% else %}
+                <a href="{{ url_for(url_fx, page=pg_num) }}" 
+                    class="btn btn-outline-info mb-4"> {{ pg_num }} </a>
+                {% endif %}
+            {% else %}
+            ... 
+            {% endif %}
+        {% endfor%}
+    {% else %}
+        <a href="#" 
+        class="btn btn-info mb-4"> 1 </a>      
+    {% endif %}
+    </div>
+{% endmacro %}

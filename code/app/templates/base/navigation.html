@@ -1,0 +1,47 @@
+{% import 'macros/navigation.html' as NAVZ %}
+{% import 'menus.html' as MENUZ %}
+
+<nav class="" role="navigation">
+    {% call NAVZ.make_nav_ul( ul_class='nav nav-pills justify-content-end') %}
+        <!-- <div class="justify-content-center"> -->
+        {% for name, aref in SCREEN_MENUZ  %}
+            {{ NAVZ.make_nav_li( name, aref, 
+                li_class='nav-item' ) }}
+        {% endfor %} 
+
+        <!-- drawer items -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
+                role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-list"></i>
+            </a>
+            {% call NAVZ.make_nav_ul( ul_class='dropdown-menu') %}
+                {% for name, aref in MENUZ.PUBLIC_MENUS  %}                    
+                    {{ NAVZ.make_nav_li( name, aref, 
+                        fa_icon='car',
+                        li_class='dropdown-item' ) }}
+                {% endfor %}
+
+                <div class="dropdown-divider"></div>
+                {% if current_user.is_authenticated %}
+                    {% set USER_MENUZ = MENUZ.PRIVATE_MENUS %}
+                {% else %}
+                    {% set USER_MENUZ = MENUZ.JOIN_MENUS%}
+                {% endif %}
+
+                {% for name, aref in USER_MENUZ  %}                    
+                    {{ NAVZ.make_nav_li( name, aref, 
+                        fa_icon='car',
+                        li_class='dropdown-item' ) }}
+                {% endfor %}
+
+                <div class="dropdown-divider"></div>
+                <div class="justify-content-center">
+                    {% for name, aref in MENUZ.ABOUTS_MENUS  %}                    
+                        {{ NAVZ.make_nav_fa_item( 'bus', aref, name=name) }}
+                    {% endfor %}
+                </div>
+            {% endcall %}
+        </li>
+    {% endcall %}
+</nav>

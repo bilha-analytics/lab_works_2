@@ -1,0 +1,25 @@
+{% macro make_nav_ul( ul_class="" ) %}
+    <ul class="{{ul_class}}">
+        {{ caller() }}
+    </ul>
+{% endmacro %}
+
+
+{% macro make_nav_li( name, a_href, 
+    li_class="nav-item", a_class="nav-link",
+    fa_icon=None ) %}
+    <li class="{{li_class}}">
+        <a class="{{a_class}}" href="{{a_href}}"> 
+            {% if fa_icon %}<i class="fa fa-{{fa_icon}}"></i>{% endif%}
+            {{ name }}</a>
+    </li>
+{% endmacro %}
+
+
+{% macro make_nav_fa_item( fa_icon, a_href, name=None,  a_class="bagde badge-primary"
+     ) %}
+    <a class="{{a_class}}" href="{{a_href}}"> 
+        <i class="fa fa-{{fa_icon}}"></i>
+        {% if name %}<small class="text-muted">{{name}}</small>{% endif %} 
+    </a>
+{% endmacro %}

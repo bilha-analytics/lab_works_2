@@ -1,0 +1,202 @@
+/*========== RECONTEXT THE CONTEXT ============*/
+
+:root {
+    --white: #ddd;  
+    --black: #212129;
+    --pastel-peach: #ab696a; 
+    --pastel-green: #5d7475;
+    --pastel-purple: #8c8c9c; 
+    --pastel-gray: #8c949c; 
+
+    --COLOR-BASE-1:  #fff;  
+    --COLOR-BASE-2: #ddd;  
+    --COLOR-BASE-3: #aaa; 
+
+    --COLOR-FORE-1:  #000;  
+    --COLOR-FORE-2: #333;  
+    --COLOR-FORE-3: #666; 
+
+    --COLOR-ACCENT-1: #ee0;
+    --COLOR-ACCENT-2: #ee6;
+    --COLOR-ACCENT-3: #eea;
+
+    
+    --COLOR-DANGER-1: #a33; 
+    --COLOR-SUCCESS-1: #3a3; 
+    --COLOR-WARNING-1: #aa3;
+    --COLOR-INFO-1: #33a; 
+
+    --COLOR-DANGER-2: #a66; 
+    --COLOR-SUCCESS-2: #6a6; 
+    --COLOR-WARNING-2: #aa6;
+    --COLOR-INFO-2: #66a; 
+
+    --COLOR-DANGER-3: #e99; 
+    --COLOR-SUCCESS-3: #9e9; 
+    --COLOR-WARNING-3: #ee9;
+    --COLOR-INFO-3: #99e; 
+
+
+    --FONT-TEXT: "Tajawal", "Open Sans", Arial, Helvetica, sans-serif;
+    --FONT-HEADINGS: "Concert One","Do Hyeon", "Volkhov", "Chilanka", Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: var( --FONT-TEXT ); 
+}
+
+*:focus {
+    outline: none;
+}
+
+
+/*========== TYPOGRAPHY ============*/
+h1, h2 , h3, h4, h5, h6 {
+    font-family:  var( --FONT-HEADINGS ); 
+}
+
+
+/*========= BOXES & LAYOUTS =============*/
+
+body {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+/*========= FORM & INPUTS STYLES =============*/
+
+form {
+    padding: 1rem; 
+    background-color: var( --pastel-peach ); 
+    margin: 1em;
+    border: 0px solid var(--pastel-gray );
+    border-radius: 0.5rem;
+    box-shadow: 0 0 4 0 var(--black); 
+}
+legend {
+    font-family: var( --FONT-HEADINGS ); 
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+
+	border-bottom: 1px solid #FFD2D2;
+}
+label {
+    display: inline-block;
+    width: 20%;
+}
+
+input[type=text], select, textarea {
+    display: inline-block; 
+    width: 75%;
+    margin: 1em 0.5em; 
+    padding: 0.5em;
+    border: 1px solid var(--pastel-gray ); 
+    border-radius: 4px;
+    resize: vertical;
+
+}
+
+/*========= GLOBAL STYLES =============*/
+.scheme-alert {
+    margin: 0.3rem; 
+    padding: 0.3em 0.3em;
+    border-left: 4px solid currentColor;
+}
+.scheme-danger {
+    background-color: var(--COLOR-DANGER-3 );
+    color: var(--COLOR-DANGER-1);
+}
+.scheme-success {
+    background-color: var(--COLOR-SUCCESS-3 );
+    color: var(--COLOR-SUCCESS-1);
+}
+.scheme-warning {
+    background-color: var(--COLOR-WARNING-3 );
+    color: var(--COLOR-WARNING-1);
+}
+.scheme-info {
+    background-color: var(--COLOR-INFO-3 );
+    color: var(--COLOR-INFO)-1;
+}
+
+.bg-purple { background-color: var(--pastel-purple ); color: var(--black); } 
+.bg-green { background-color: var(--pastel-green ); color: var(--white); } 
+.bg-peach { background-color: var(--pastel-peach ); color: var(--black); } 
+.bg-gray { background-color: var(--pastel-gray ); color: var(--white); } 
+
+
+/*========= NAVIGATION =============*/
+
+a {
+    text-decoration: none;
+}
+
+a:hover ,
+a:focus {
+    font-weight: 900;
+}
+
+
+/*========== SECTIONS AND DIVS ============*/
+.onepager {
+    display: block;
+    position: relative;
+}
+.section-container {
+    padding: 2em 3em;
+    position: relative;
+    width: 100%;
+    min-height: 98vh;
+}
+
+.section-container::before,
+.section-container::after {
+    position: absolute;
+    content: ""; 
+    width: 40px;
+    height: 40px;
+    bottom: -0.4em;
+    background-color: inherit;
+    z-index: 90;
+}
+.section-container::before{    
+    right: 50%;
+    transform: skew(0, 20deg);
+}
+
+.section-container::after {
+    left: 50%;
+    transform: skew(0, -20deg);
+}
+
+.section-h1 {
+    font-size: 2em;
+}
+.section-next, 
+.section-prev {    
+    position: absolute;
+    right: 49.1%;
+    bottom: -0.8rem;  
+    /* placing it at right corner with a transluscent round bg AS OPPOSED TO placing it at the center of sxn w
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;*/
+    color: var( --pastel-gray );
+    font-size: 0.7em;
+    z-index: 1000;
+} 
+.section-next {
+    content: ""
+}
+.section-prev {
+    content: ""
+}
+/*========== COMPONENTS ============*/

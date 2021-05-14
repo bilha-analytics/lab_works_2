@@ -1,0 +1,12 @@
+{% extends 'base/app_layout.html' %} 
+
+{% block body %}
+<!-- section -->
+<section class='base_screen'>
+    <main> 
+        {% include 'base/notifications.html' %}
+    
+        {% block pagecontent %} {% endblock %}
+    </main>    
+</section> 
+{% endblock %}

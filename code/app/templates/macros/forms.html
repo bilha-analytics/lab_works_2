@@ -1,0 +1,76 @@
+<!-- ==== Forms ==== -->
+{% macro make_form( form, 
+    legend=None, 
+    form_input_fields = None, 
+    axn_url=" ", 
+    form_style="", 
+    fa_icon=None, 
+    is_multipart = False, 
+    div_style = " ") %}
+    <div class="{{ div_style }}">
+        {% if is_multipart %}
+        <form method="POST" action="{{axn_url}}" class="{{form_style}}" enctype="multipart/form-data">
+        {% else %}
+        <form method="POST" action="{{axn_url}}" class="{{form_style}}" >
+        {% endif %}
+            {{ form.hidden_tag() }} 
+
+            {% if legend %}
+            <legend class="border-bottom mb-4"> {% if fa_icon %}<i class="fa fa-{{fa_icon}}"></i> {% endif %} {{ legend }} </legend>
+            {% endif %} 
+
+            {% if form_input_fields %}
+                {% for field in form_input_fields %}
+                    {{ form_input( form | attr(field) )  }}
+                {% endfor %}
+            {% endif %}
+
+            {{ caller() }}
+        </form>
+    </div>
+{% endmacro %}
+
+
+{% macro form_input( form_field, 
+    div_style="form-group", 
+    label_style="form-control-label",
+    input_style="form-control form-control-sm", 
+    fa_icon=None, 
+    show_label=True,
+    is_inline=False,
+    svg_use=None,
+    svg=None )%} 
+
+    {% if is_inline %}
+        {% set div_style = div_style + " custom-control-inline" %}
+    {% endif %}
+
+    <div class="{{div_style}} zform_item"> 
+        {% if fa_icon %}<i class="fa fa-{{fa_icon}}"></i> {% endif %} {% if show_label %} {{ form_field.label(class=label_style ) }} {% endif %} 
+        
+        {% if form_field.errors %}
+            {{ form_field(class=input_style+' is-invalid') }}
+            <div class="invalid-feedback">
+                {% for err in form_field.errors %}
+                <span> {{ err }} </span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form_field(class=input_style) }}
+        {% endif %}
+
+        {% if svg %}
+            {{ svg }}
+        {% endif %}
+
+
+        {% if svg_use %}
+            <svg> 
+                <use xlink:href="#{{svg_use}}" />
+            </svg>
+        {% endif %}
+
+    </div>
+{% endmacro%}
+
+
