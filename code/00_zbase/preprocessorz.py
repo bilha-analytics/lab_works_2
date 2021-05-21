@@ -64,7 +64,6 @@ class FileLoader(ZTransformableInterface):
         return O_ 
 
 
-
 class ColorChannelSelector(ZTransformableInterface,ChainableMixin):
     '''
     @inputs:    list of channels to select
@@ -104,6 +103,7 @@ class EqualizerDenoiser(ZTransformableInterface, ChainableMixin):
     def __init__(self, list_denoise_func_param_pairs=None, 
                     on_first_channel_only=False, 
                     append=True):   
+        super(EqualizerDenoiser, self).__init__()  
         self.append_to_current_fmap = append 
         self.list_denoise_func_param_pairs = list_denoise_func_param_pairs
         self.on_first_channel_only = on_first_channel_only
@@ -145,6 +145,7 @@ class Tensorfy(ZTransformableInterface):
     normalizer_TL =  transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
 
     def __init__(self, out_dim=(1, 3, 224, 224), rescale_TL=True, enforce_float=True): 
+        super(Tensorfy, self).__init__()  
         self.rescale_for_TL = rescale_TL 
         self.out_dim = out_dim 
         self.enforce_float = enforce_float 
@@ -167,3 +168,42 @@ class Tensorfy(ZTransformableInterface):
             O_.append( o_ )
         return O_ 
     
+
+class TorchifyTransformz(ZTransformableInterface):
+    '''
+    @actions:   wrap torchvision transforms in sklearn transformable for pipeline and permutations
+    ''' 
+    ## TODO: menu of common transformz
+    normalizer_TL =  transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
+    # augmentor = transforms.
+
+    def __init__(self, transformz_composed): 
+        super(TorchifyTransformz, self).__init__()  
+        self.transformz_composed = transformz_composed 
+
+    def fit(self, X_, y=None):
+        return self 
+    
+    def transform(self, X_, y=None):
+        # O_ = [ self.normalizer_TL(torch.tensor(o_.astype('f').reshape(self.out_dim) ) ) for x_ in X_]
+        O_ = []
+        for x_ in X_:
+            o_ = x_.copy() 
+            ## TorchVision transformz op on PIL.Image or ndarray
+            # o_ = torch.tensor( np.transpose(o_, (2, 0, 1)) )  ###tensorvision: C, H, W --> np.transpose C.H.W --> 012
+            o_ = self.transformz_composed( o_ ) 
+            O_.append(o_) 
+        return O_ 
+    
+
+class NdarrayToPILImage(ZTransformableInterface):    
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X_, y=None):
+        O_ = []
+        for x in X_:
+            O_.append( utilz.Image.img_to_pil(x)  )   ##TODO: not just RGB
+        return O_ 
+
+

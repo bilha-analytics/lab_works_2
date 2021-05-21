@@ -13,6 +13,8 @@ from datetime import datetime
 
 import numpy as np 
 
+from PIL import Image as PILimg 
+
 import skimage 
 from skimage import io, color , img_as_float, exposure, transform, filters 
 
@@ -177,7 +179,10 @@ class Image:
         O_ = np.dstack(O_)  
         print('patch.dim: ', O_.shape )
         return O_ 
-        
+
+    @staticmethod
+    def img_to_pil(img):
+        return PILimg.fromarray(np.uint8( img ), 'RGB' )         
     
 ### ==== FileIO 
 class FileIO:

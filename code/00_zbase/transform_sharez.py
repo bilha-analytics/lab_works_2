@@ -11,6 +11,9 @@ from tqdm import tqdm
 import pickle 
 
 import numpy as np
+
+from skimage import color as sk_color
+from skimage import img_as_float, img_as_ubyte 
 from skimage.filters import unsharp_mask, gaussian 
 
 import torch
@@ -19,7 +22,8 @@ from torch import nn
 import torch.nn.functional as nn_F
 from torchvision import models 
 
-import encoderz 
+import encoderz
+import utilz 
 
 class ChainableMixin:
     '''
@@ -54,7 +58,7 @@ class ChainableMixin:
 
 
 
-class NormalizersThresholderzAlogirthmz:
+class NormalizerzThresholderzAlgz:
     '''
     Primarily statistical methods/calculations --> at pixel or hood level Vs global??
     @inputs:    a single image/fmap 
@@ -64,7 +68,7 @@ class NormalizersThresholderzAlogirthmz:
     ''' 
     
     @staticmethod 
-    def clear_outter_circle(img, b_thresh=0.9): 
+    def _clear_outter_circle(img, b_thresh=0.9): 
         '''
 
         ''' 
@@ -85,7 +89,7 @@ class NormalizersThresholderzAlogirthmz:
         return o 
 
     @staticmethod
-    def thresholded_center_range(o, om, orange, thresh, update_val, drxn_less, clear_ring):
+    def _thresholded_center_range(o, om, orange, thresh, update_val, drxn_less, clear_ring):
         '''
         @inputs:
             clear_ring: None if NO-OP else a % value, indicating % of outter ring of image to clear
@@ -97,43 +101,44 @@ class NormalizersThresholderzAlogirthmz:
             o[ ( (o - om)/orange ) > thresh ] = update_val 
 
         if clear_ring:
-            o = NormalizersThresholderzAlogirthmz.clear_outter_circle(o, b_thresh=clear_ring)  
+            o = NormalizerzThresholderzAlgz._clear_outter_circle(o, b_thresh=clear_ring)  
         return o 
         
     @staticmethod 
-    def thresh_range(x, thresh, update_val=0, 
+    def thresh_range(x, thresh, update_val=0, do_eq=True, 
                     drxn_less = True, clear_ring=None):
-        o = x.copy() 
+        o = NormalizerzThresholderzAlgz._get_channel_eq(x ) if do_eq else x.copy() 
         om = o.min()
         orange = o.max() - o.min() 
-        o = NormalizersThresholderzAlogirthmz.thresholded_center_range(o, om, orange, thresh, 
+        o = NormalizerzThresholderzAlgz._thresholded_center_range(o, om, orange, thresh, 
                         update_val, drxn_less, clear_ring )
         return o 
 
     @staticmethod
-    def thresh_norm_std(x, thresh, update_val=0, std_factor=1, 
-                        drxn_less = True, clear_ring=None):
-        o = x.copy() 
+    def thresh_norm_std(x, thresh, update_val=0, std_factor=1,  do_eq=True, 
+                        drxn_less = True, clear_ring=None):        
+        o = NormalizerzThresholderzAlgz._get_channel_eq(x ) if do_eq else x.copy()
         om = o.mean()
         orange = np.std( o )*std_factor 
-        o = NormalizersThresholderzAlogirthmz.thresholded_center_range(o, om, orange, thresh, 
+        o = NormalizerzThresholderzAlgz._thresholded_center_range(o, om, orange, thresh, 
                         update_val, drxn_less, clear_ring )
         return o 
 
     @staticmethod 
-    def thresh_double_red2(x, thresh, update_val=0, 
-                            drxn_less = True, clear_ring=None): 
-        o1 = NormalizersThresholderzAlogirthmz.thresh_range(x, thresh, update_val, drxn_less, clear_ring)
-        o2 = NormalizersThresholderzAlogirthmz.thresh_norm_std(x, thresh, update_val, drxn_less, clear_ring)
+    def thresh_double_red2(x, thresh, update_val=0,  do_eq=True, 
+                            drxn_less = True, clear_ring=None):         
+        o1 = NormalizerzThresholderzAlgz.thresh_range(x, thresh, update_val, do_eq=do_eq, drxn_less=drxn_less, clear_ring=clear_ring)
+        o2 = NormalizerzThresholderzAlgz.thresh_norm_std(x, thresh, update_val, do_eq=do_eq, drxn_less=drxn_less, clear_ring=clear_ring)
         o = o2 + (o1*(1+o2) ) 
         return o 
 
     @staticmethod 
-    def thresh_darks_blend_but(x, thresh, update_val=0, clear_ring=None): 
+    def thresh_darks_blend_but(x, thresh, update_val=0,  do_eq=True, 
+                                clear_ring=None): 
         ## 1. bloody regions         
-        o = NormalizersThresholderzAlogirthmz.thresh_range(x, 1-2.6*thresh, update_val=0.1)
+        o = NormalizerzThresholderzAlgz.thresh_range(x, 1-2.6*thresh, update_val=0.1, do_eq=do_eq)
         o = o * x ## TODO: select single channel green like  from x 
-        o = NormalizersThresholderzAlogirthmz.thresh_range(x, 2.8*thresh, drxn_less=False ) 
+        o = NormalizerzThresholderzAlgz.thresh_range(x, 2.8*thresh, drxn_less=False, do_eq=do_eq  ) 
         o = o * x ## TODO: select single channel green like  from x 
         o = unsharp_mask(o, radius=5, amount=2) 
 
@@ -144,9 +149,91 @@ class NormalizersThresholderzAlogirthmz:
         o2 = np.log( o2 / o2.sum() ) 
 
         if clear_ring:
-            o1 = NormalizersThresholderzAlogirthmz.clear_outter_circle(o, b_thresh=clear_ring) 
+            o1 = NormalizerzThresholderzAlgz._clear_outter_circle(o, b_thresh=clear_ring) 
 
         return o1 #o1, o2  
+
+### ==== TODO: refactor 
+#o = img_as_ubyte(self._get_channel_eq( img[:,:,-1] ) ) 
+
+    @staticmethod
+    def thresh_yellow(x, do_eq=True, clear_ring=None, threshit=False, thresh=0.97): 
+        o = NormalizerzThresholderzAlgz._get_channel_eq(x ) if do_eq else x.copy() 
+        ##yellow is in A and is -ves
+        # o = o[:,:,1] ## input is channel selected already << TODO: order of this viz a viz eq
+        o[o >= 0 ] = 0
+        o = -1 * o  
+
+        if threshit: ## TODO: Order of this vis a viz clear ring 
+            rrange = o.max() - o.min() 
+            o[ ((o - o.min())/rrange) <  thresh ] = 0 
+
+        if clear_ring:
+            o = NormalizerzThresholderzAlgz._clear_outter_circle(o, b_thresh=clear_ring) 
+
+        return o 
+
+    @staticmethod
+    def thresh_blue(x, thresh=1, do_eq=True):         
+        o = NormalizerzThresholderzAlgz._get_channel_eq(x ) if do_eq else x.copy()
+        o = img_as_ubyte(o)  
+        o[ o != thresh] = 0 
+        o[ o == thresh] = 255   
+        return img_as_float(o) #.astype('uint8') 
+
+
+    @staticmethod
+    def _get_channel_eq(img, c=-1, eq_mtype=1): ## -1 is on gray scale 
+        return utilz.Image.hist_eq( utilz.Image.get_channel(img, c), mtype=eq_mtype ) if c >= 0 \
+            else utilz.Image.hist_eq( utilz.Image.gray_scale(img), mtype=eq_mtype  )
+   
+    @staticmethod
+    def _get_lab_img(img, extractive=True): 
+        o = sk_color.rgb2lab( img ) 
+        if extractive:
+            l = o[:,:,0]
+            ## bluez are -ves, redz are positivez
+            b = o[:,:,-1]
+            b[ b >=0 ] = 0
+            ## QUE: add back yellow to red or not ?? << does it seem to be useful << TODO: review
+            r = o[:,:,1]
+            # y = r.copy()
+            # y[y>=0] = 0
+            # process red
+            r[r <= 0 ] = 0
+            # add back yellow
+            # r = r*y 
+            o = np.dstack([l,r,b])  
+        # normalize-ish :/ <<< TODO: fix 
+        # abs_max = np.max( np.abs( o ) ) 
+        # o = o/abs_max
+        return o 
+
+    ## TODO: Thresholding
+    @staticmethod
+    def _get_yellow_from_rgb2lab(img, threshit=False, thresh=0.97): 
+        o = sk_color.rgb2lab( img )  
+        ##yellow is in A and is -ves
+        o = o[:,:,1]
+        o[o >= 0 ] = 0
+        o = -1 * o  
+        if threshit:
+            rrange = o.max() - o.min() 
+            o[ ((o - o.min())/rrange) <  thresh ] = 0 
+        return o 
+
+    @staticmethod
+    def _lab_to_rgb(img):
+        return sk_color.lab2rgb( img ) 
+
+    @staticmethod
+    def _get_color_eq(img):
+        ## 2. CLAHE/CStreching per channel 
+        o = [NormalizerzThresholderzAlgz._get_channel_eq(img, i, eq_mtype=1) for i in range(3)] 
+        o = np.dstack(o) 
+
+        return o
+
 
 
 class EncodeImage:
