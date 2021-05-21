@@ -85,7 +85,8 @@ class ColorChannelz(TransformerMixin, BaseEstimator):
         # o = sk_color.lab2rgb( o ) 
 
         ## 2. CLAHE/CStreching per channel 
-        o = [self._get_channel_eq(img, i, eq_mtype=1) for i in range(3)] 
+        c = img.shape[2] 
+        o = [self._get_channel_eq(img, i, eq_mtype=1) for i in range( c ) ]  
         o = np.dstack(o) 
 
         return o
@@ -434,7 +435,9 @@ class PseudoModalChannelz(ColorChannelz):
     
     def __init__(self, g_channel, topn, 
                 lbp_radius = 1, lbp_method = 'uniform', 
-                add_origi=True , vesssels_thresh=0.9, red_thresh=0.97, yellow_thresh=0.4, color_space='lab'):
+                add_origi=True , vesssels_thresh=0.9, 
+                red_thresh=0.97, yellow_thresh=0.4, 
+                color_space='lab'):
         super(PseudoModalChannelz, self).__init__()  
         self.add_origi = add_origi   
         self.red_thresh = red_thresh 

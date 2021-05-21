@@ -174,11 +174,15 @@ class NormalizerzThresholderzAlgz:
         return o 
 
     @staticmethod
-    def thresh_blue(x, thresh=1, do_eq=True):         
+    def thresh_blue(x, thresh=1, do_eq=True, clear_ring=None):         
         o = NormalizerzThresholderzAlgz._get_channel_eq(x ) if do_eq else x.copy()
         o = img_as_ubyte(o)  
         o[ o != thresh] = 0 
         o[ o == thresh] = 255   
+
+        if clear_ring:
+            o = NormalizerzThresholderzAlgz._clear_outter_circle(o, b_thresh=clear_ring) 
+
         return img_as_float(o) #.astype('uint8') 
 
 

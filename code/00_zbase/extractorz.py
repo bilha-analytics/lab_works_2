@@ -85,9 +85,9 @@ class PseudoColorChannelz(ZTransformableInterface, ChainableMixin):
     ''' 
     _default_threshold_fmap_on_origi_RGB = {
         'red': (0, NormalizerzThresholderzAlgz.thresh_double_red2, {'thresh': .97, 'color_space': 'rgb', 'do_eq': True}),
-        'yellow': (1, NormalizerzThresholderzAlgz.thresh_yellow, {'thresh': .4, 'threshit': True, 'color_space': 'lab', 'clear_ring': .85, 'do_eq': True} ),
-        'blue': (2, NormalizerzThresholderzAlgz.thresh_blue, {'thresh': 1, 'color_space': 'rgb', 'do_eq': True}),
-        'darks': (1, NormalizerzThresholderzAlgz.thresh_darks_blend_but, {'thresh': .97, 'color_space': 'rgb', 'clear_ring': .85, 'do_eq': True}),
+        'yellow': (1, NormalizerzThresholderzAlgz.thresh_yellow, {'thresh': .4, 'threshit': True, 'color_space': 'lab', 'clear_ring': .9, 'do_eq': True} ),
+        'blue': (2, NormalizerzThresholderzAlgz.thresh_blue, {'thresh': 1, 'color_space': 'rgb', 'do_eq': True, 'clear_ring': .9}),
+        'darks': (1, NormalizerzThresholderzAlgz.thresh_darks_blend_but, {'thresh': .97, 'color_space': 'rgb', 'clear_ring': .9, 'do_eq': True}),
     }
 
     DEFAULTZ_TITLEZ = ['origi', 'red', 'yellow', 'blue', 'darks']

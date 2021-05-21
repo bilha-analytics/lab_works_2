@@ -15,7 +15,7 @@ from skimage import exposure, transform, filters
 
 import utilz 
 from interfacez   import ZTransformableInterface
-from transform_sharez import ChainableMixin 
+from transform_sharez import ChainableMixin, NormalizerzThresholderzAlgz 
 
 import torch 
 from torchvision import transforms 
@@ -70,11 +70,13 @@ class ColorChannelSelector(ZTransformableInterface,ChainableMixin):
     @output:    new fmap 
     @actions:   select channels in provided order 
     ''' 
-    def __init__(self, list_of_channels, trans_color_space=None , append_to_current_fmap=False):
+    def __init__(self, list_of_channels, trans_color_space=None, 
+                    do_eq=False, append_to_current_fmap=False):
         super(ColorChannelSelector, self).__init__()
         self.append_to_current_fmap = append_to_current_fmap 
         self.list_of_channels = list_of_channels 
-        self.trans_color_space = trans_color_space  #E.G. color.rgb2lab         
+        self.trans_color_space = trans_color_space  #E.G. color.rgb2lab     
+        self.do_eq = do_eq     
 
     def fit(self, X, y=None):
         return self 
@@ -82,7 +84,7 @@ class ColorChannelSelector(ZTransformableInterface,ChainableMixin):
     def transform(self, X_, y=None):
         O_ = [] 
         for x in X_:
-            o = x.copy()    
+            o = NormalizerzThresholderzAlgz._get_color_eq(x ) if self.do_eq else x.copy()   
             # print("INCOMING: ", o.shape , "CHAIN = ", self.append_to_current_fmap, "Cz = ", self.list_of_channels )
             if self.trans_color_space:
                 o = self.trans_color_space( o )  ## TODO: deal with can skimage.color only do RGB can't do RGBA
@@ -189,8 +191,8 @@ class TorchifyTransformz(ZTransformableInterface):
         O_ = []
         for x_ in X_:
             o_ = x_.copy() 
-            ## TorchVision transformz op on PIL.Image or ndarray
-            # o_ = torch.tensor( np.transpose(o_, (2, 0, 1)) )  ###tensorvision: C, H, W --> np.transpose C.H.W --> 012
+            ## TorchVision transformz op on PIL.Image or ndarray 
+            # o_ = torch.tensor( np.transpose(o_, (2, 0, 1)) )  # TODO: confirm order ##tensorvision: C, H, W --> np.transpose C.H.W --> 012 
             o_ = self.transformz_composed( o_ ) 
             O_.append(o_) 
         return O_ 
