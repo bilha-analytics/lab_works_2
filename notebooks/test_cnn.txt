@@ -1,0 +1,168 @@
+22-05-2021 13:23:43: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:43: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:44: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:43: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:44: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:44: [3 logit scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:23:43: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:44: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:23:44: [3 logit scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:23:44: [4 logit power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:25:04: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:04: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:05: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:04: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:05: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:05: [3 logit scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:25:04: [1 svm scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:05: [2 svm power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:25:05: [3 logit scaler] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:25:05: [4 logit power] Best score = 0.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:35: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:35: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:30:31: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:35: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:30:31: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:30:32: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:35: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:30:31: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:30:32: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:30:32: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:33: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:27:34: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:27:35: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:30:31: [1 svm scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:30:32: [2 svm power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('svm', SVC(C=1, kernel='linear'))]))]) paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+22-05-2021 13:30:32: [3 logit scaler] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('scaler', StandardScaler())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       
+22-05-2021 13:30:32: [4 logit power] Best score = 1.0000 estimator = Pipeline(steps=[('data_pipe', Pipeline(steps=[('power', PowerTransformer())])),
+                ('model_pipe',
+                 Pipeline(steps=[('logit', LogisticRegression(C=1))]))]) paramz = {'model_pipe__logit__C': 1}                       

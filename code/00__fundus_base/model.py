@@ -68,7 +68,7 @@ class ZModel(ZSerializableMixin, BaseEstimator): ## TODO: VS internal class for 
 
     def score(self, X_, y_=None):## y is Nx1
         yhat = self.predict(X_, y_)  
-        ACC_ = self.score(yhat, y_)
+        ACC_ = self.zscore(yhat, y_)
         return ACC_
 
     ### ===  things pyTorch and cuda ==========

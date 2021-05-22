@@ -1,7 +1,7 @@
 '''
 author: bg
 goal: 
-type: shared/utilz for modelz @@ TL, Common archs,  
+type: shared/utilz and building blocks for modelz @@ TL, Common archs,  
 how: 
 ref: 
 refactors: 
@@ -13,9 +13,11 @@ from tqdm import tqdm
 import numpy as np
 
 from torch import nn
+from torch.nn import functional as F
 from torchvision import models 
 
 
+### === 1. Transfer Learning blocks - encoders, backbones ===
 class TLModelBuilder:
     '''
 
@@ -62,9 +64,9 @@ class TLModelBuilder:
             for param in model.parameters():
                 param.requires_grad = False  
 
-        ## 3. update classifier layer as desired 
+        ## 3. update classifier layer as desired  Default = chuck it
         ## TODO: refactor classifier_update values @ uniformity 
-        # Leave as is=-999, Delete it=None, Set it to something new = object
+        # @Values == Leave as is=-999, Delete it=None, Set it to something new = object
         if classifier_update is None:
             # delete
             TLModelBuilder._delete_classifier_block(model_name, model) 
@@ -83,7 +85,8 @@ class TLModelBuilder:
         mb_name = TLModelBuilder._model_classifier_blocks.get(model_name, None)
         if mb_name is None:
             raise Exception(f"Unsupported model {model_name}")
-        delattr(model, mb_name[0] ) 
+        for mb in mb_name[:1]: ## TODO: nesting errors @ name + what layers ok to del 
+            delattr(model, mb ) 
         # return model ##<-- in_place operation on model  
 
 
@@ -183,3 +186,58 @@ class TLModelBuilder:
     #     pass 
 
         
+### === 2. CNN blocks menu - conv (basic, residual, non-activated, ), deconv(opposite per conv), 1x1 bottleneck, 
+class CNNBlocksBuilder:
+    '''
+    @inputs:    menu option, paramz --> only at grad aware components, the rest leave to calling model 
+    @outputs:   nn.ModuleList or list of nn.Modules TODO: traversal and registration implications
+    @actions:   assemble ready to use common types 
+    ''' 
+    @staticmethod
+    def conv_block(in_channelz, out_channelz, bias=True, 
+                    kernel=3, stride=1, padding=0,  padding_mode='zeros', #kernel can be list. Padding is TODO
+                    n_conv_layerz=1, batch_norm=True, activation=nn.ReLU, 
+                    batch_norm_affine=True, activation_argz = {}, 
+                    is_modulelist=True ):
+        # kernel = (kernel, kernel) if isinstance(kernel, int) else kernel 
+
+        modz = []
+        ## 1. the conv layerz 
+        n_in = in_channelz
+        n_out = out_channelz ## TODO: calc backwards @ kern, stride, padding et all 
+        for i in range(n_conv_layerz):
+            modz.append( nn.Conv2d(n_in, n_out, kernel_size=kernel, stride=stride) ) ## TODO: n_channelz deal, padding options
+            n_in = n_out 
+            n_out = n_out ## TODO: calc fwd 
+
+        ## 2. batchnorm and activation TODO: affine=True/False @ learnable params <--- batchnorm and gradientz calc; should that behere and how to block grad iff
+        if batch_norm:
+            modz.append(nn.BatchNorm2d(n_out, affine=batch_norm_affine) ) 
+
+        if activation:
+            modz.append( activation( **activation_argz) ) 
+
+        ## track residuals, etc @ caller b/c not grad 
+
+        ## 3. return modulelist or list of assembled components
+        if is_modulelist:
+            return nn.ModuleList( modz )
+        else:
+            return modz 
+        
+
+
+### === 3. Algorithms/Computations e.g. loss funcs, fusion, residuals add, 
+class AlgorithmzFunc:
+    '''
+    Collection of reusable computations <-- 
+    @inputs:    e.g. from forward call, loss/criterion wrapper or an optim wrapper
+    @outpus:    computed results on single or batches    
+    @actions:   compute as per func 
+    @TODO: strategy design approach Vs builder + chainable etc  THEN combine with pytorch or sklearn wrapper  or Model_trainerz approach 
+    '''
+
+    @staticmethod
+    def add_residuals(x, r, r_ratio=1, method='sum'): 
+        ## deal with different ways of incorporating residuals 
+        return x + (r*r_ratio) 
