@@ -195,20 +195,26 @@ class CNNBlocksBuilder:
     ''' 
     @staticmethod
     def conv_block(in_channelz, out_channelz, bias=True, 
-                    kernel=3, stride=1, padding=0,  padding_mode='zeros', #kernel can be list. Padding is TODO
-                    n_conv_layerz=1, batch_norm=True, activation=nn.ReLU, 
-                    batch_norm_affine=True, activation_argz = {}, 
+                    kernel=3, stride=1, padding=1,  padding_mode='zeros', #kernel can be list. Padding is TODO
+                    n_conv_layerz=2, 
+                    batch_norm=True, batch_norm_affine=True, 
+                    activation=nn.ReLU, activation_argz = {'inplace':True}, 
+                    maxpool=True, maxpool_argz={'kernel_size':2, 'stride':2}, 
+                    dropout=True, dropout_argz={'p':.4, 'inplace':True}, ## inplace Vs grad includes 
                     is_modulelist=True ):
         # kernel = (kernel, kernel) if isinstance(kernel, int) else kernel 
 
         modz = []
         ## 1. the conv layerz 
         n_in = in_channelz
-        n_out = out_channelz ## TODO: calc backwards @ kern, stride, padding et all 
+        #n_out = out_channelz ## TODO: calc backwards @ kern, stride, padding et all <--- n_out = 1 + (n_in +2*p - k)/s ; p padding, k kernel , s stride sizes
+        n_out = max( 1, ((out_channelz - 1)*stride) + kernel - (2*padding) ) ## TODO by n_conv_layerz @ > 2
         for i in range(n_conv_layerz):
-            modz.append( nn.Conv2d(n_in, n_out, kernel_size=kernel, stride=stride) ) ## TODO: n_channelz deal, padding options
+            print(n_in, n_out, end="\t")
+            modz.append( nn.Conv2d(n_in, n_out, kernel_size=kernel, stride=stride, padding=padding) ) ## TODO: n_channelz deal, padding options
             n_in = n_out 
-            n_out = n_out ## TODO: calc fwd 
+            n_out = 1 + ((n_in +(2*padding) - kernel)//stride) ## TODO: calc fwd 
+            print("-->", n_in, n_out) 
 
         ## 2. batchnorm and activation TODO: affine=True/False @ learnable params <--- batchnorm and gradientz calc; should that behere and how to block grad iff
         if batch_norm:
@@ -216,6 +222,12 @@ class CNNBlocksBuilder:
 
         if activation:
             modz.append( activation( **activation_argz) ) 
+
+        if maxpool:
+            modz.append( nn.MaxPool2d(**maxpool_argz ) )  ## TODO: @ grad includes
+        
+        if dropout:
+            modz.append( nn.Dropout2d(**dropout_argz) ) ## TODO: @grads includes + order norm,pool,dropout??
 
         ## track residuals, etc @ caller b/c not grad 
 

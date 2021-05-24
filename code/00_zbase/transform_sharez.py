@@ -153,8 +153,8 @@ class NormalizerzThresholderzAlgz:
 
         return o1 #o1, o2  
 
-### ==== TODO: refactor 
-#o = img_as_ubyte(self._get_channel_eq( img[:,:,-1] ) ) 
+    ### ==== TODO: refactor 
+    #o = img_as_ubyte(self._get_channel_eq( img[:,:,-1] ) ) 
 
     @staticmethod
     def thresh_yellow(x, do_eq=True, clear_ring=None, threshit=False, thresh=0.97): 

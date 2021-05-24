@@ -8,11 +8,12 @@ refactors:
 '''
 
 
+from functools import total_ordering
 from tqdm import tqdm 
 
 import numpy as np
 
-from sklearn.base import BaseEstimator
+from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.pipeline import Pipeline 
 from sklearn import metrics as skmetrics 
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
@@ -23,8 +24,9 @@ from torch import optim
 
 from zreport import ZReporter 
 
-class ModelNetwork(BaseEstimator):
+class ModelNetwork(BaseEstimator, ClassifierMixin):
     '''
+    TODO: ClassifierMixin 
     Once a model is assembled not add training related functionality
         loss funcs, optimization, residuals, graph Vs CNN Vs DNN etc 
         Using SKLearn for training b/c grid search and pipelines. So this wraps torch models as well
@@ -78,26 +80,40 @@ class ModelNetwork(BaseEstimator):
         O_ = self.predict(X_, y_)  
         return O_ 
 
-    def score(self, X_, y_=None): 
-        yhat = self.predict(X_, y_) 
-        yhat = torch.argmax(yhat) ## TODO: torch Vs numpy check and fix
-        acc = self.scoring_func(y_, yhat) ## TODO: score and other metrics and classification Vs regression etc
-        return acc 
+    def score(self, yhat, y_):    
+        # print(y_.shape )
+        # print(yhat[0].shape) 
+        yhat = np.array([y.detach().cpu().numpy().max() for y in yhat] ) 
+        y_ = y_.detach().cpu().numpy()
+        # print("=========SCORING 1========", type(y_), type(yhat), y_.shape, yhat.shape )
+        return np.mean(  np.abs(y_ - yhat )/yhat.max() )# 
+        # return self.scoring_func( y_, yhat , normalize=True)
+        
 
     ## ==== 2. PyTorch train and eval/predict 
     def train(self, X_, y_=None): ##X_ is  a list of observations even iff single observation 
         ## operate on a single instance or a batch X_ = (n,c,h,w) or something like (n, x_i)
         running_loss = 0 
         y_ = [None for _ in range( len(X_) ) ] if y_ is None else y_  ## for case of unsupervised or something 
-        
+        # print( "****** X_ size = ",len(X_) )
         for x, y in zip(X_, y_):  
+            # 0. prep y
+            # print('b4: ', y) 
+            # y = torch.tensor( [y,], ).reshape(1,1) # [y,] ) ##TODO: fix this for now force #y.reshape(1, *y.shape) 
+            # y = y.reshape(1,1,*y.shape )
+            y = y.reshape(1,*y.shape )
+            # print(y.shape, " >>> ", y.item() )
+            # print('after: ',y.shape, y)
             # a. zero the grads
             self.optim_func.zero_grad() 
             # b. set model to training mode
             self.model.train()
             # c. forward pass, calc loss, backprop, 
             x = self.model( x ) 
-            loss = self.loss_func(x, y)  
+            # print('@LOSS: ', x.shape, y.shape )
+            # print('AS VIEWS: ', x.shape, y.view(-1).reshape(1, -1).shape )
+            # loss = self.loss_func(x, y.view(-1).reshape(1,-1) ) #.squeeze(1) )
+            loss = self.loss_func(x, y ) #.squeeze(1) )
             loss.backward()
             self.optim_func.step() 
             # d. update aggregates and reporting 
@@ -109,8 +125,7 @@ class ModelNetwork(BaseEstimator):
 
         return running_loss 
 
-    def predict(self, X_, y_=None):
-        y_ = [None for _ in range( len(X_) ) ] if y_ is None else y_  ## for case of unsupervised or something 
+    def predict(self, X_):
         O_ = []
         with torch.no_grad():
             # a. go into eval mode and forward pass 
@@ -179,7 +194,7 @@ class TrainingManager():
 
     def training_callback(self, loss, n):
         self.running_loss += loss 
-        MSG_LOSS_PER_EPOCH = "Train Epoch {:5d}/{:5d}: Loss: {:15.4f}/{:15.4f} \tn = {:5d}".format
+        MSG_LOSS_PER_EPOCH = "Train Epoch {:d}/{:d}: Loss: {:15.4f}/{:f} (current/running) \tn = {:5d}".format
         ZReporter.add_log_entry( 
             MSG_LOSS_PER_EPOCH(
                 self.current_epoch, self.epochz, loss, self.running_loss, n
@@ -193,18 +208,20 @@ class TrainingManager():
                     batch_size=64, train_test_val_split=(.7, .2, .1) ): 
 
         MSG_GSEARCH_RESULTS = "[{:7s}] Best score = {:2.4f} <<< paramz = {:50s}".format ## SCORE, ESTIMATOR, PARAMZ <-- estimator = {:10s}
-        ## TODO: fix epochz init cycle Vs training callback etc 
-        self.running_loss = 0             
-        self.epochz = epochz
-        self.current_epoch = 0 
         ##TODO: fix
         self._build_permutationz(data_pipez, model_pipez) # permutes into data-model pairs 
         ## 1. Train-test-val data split and setup dataloader/dispatcher -- sync pytorch and sklearn 
+        ## TODO: fix epochz init cycle Vs training callback etc 
+        self.epochz = epochz
 
         ## 2. grid search on permutationz 
         O_ = []
         for p, (data_p, model_p) in tqdm( enumerate(self.permutationz, 1) ) :
-            o = self.run( data_p, model_p, X_data, y_data) 
+            self.running_loss = 0             
+            self.current_epoch = 0 
+            for e in range(self.epochz):     ##TODO: recheck logic, saving per batch Vs epoch Vs per permute  
+                self.current_epoch = e+1 
+                o = self.run( data_p, model_p, X_data, y_data) 
             O_.append( o ) 
             ZReporter.add_log_entry( MSG_GSEARCH_RESULTS(f"Perm-{p} {o[0]}",  o[1], *[str(i) for i in o[3:]]) ) # ESTIMATOR = 2
         return O_   

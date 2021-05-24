@@ -207,14 +207,20 @@ class Reshapeor(ZTransformableInterface):
         if isinstance(self.newshape, int) and (self.newshape == -1): 
             O_ = [x.flatten() for x in X] 
         # b. reshape to tensor NCHW
-        elif isinstance(self.newshape, int) and (self.newshape == 99): 
+        elif isinstance(self.newshape, int) and (self.newshape == -99): 
             O_ = [x.reshape( [1,]+list(reversed(x.shape)) ) for x in X] 
+        # c. others on tuple 
+        elif isinstance(self.newshape, int) and (self.newshape == 99): 
+            O_ = [x.reshape( [1,]+list(x.shape) ) for x in X] 
         # c. others on tuple 
         else:
             O_ = [x.reshape( self.newshape ) for x in X] 
         # print( "3D -- input shape: ", X[0].shape, " Vs ", O_[0].shape )
+        # print("RESHAPED: ", X[0].shape, ' to ', O_[0].shape )
         return O_
 
+class YLabelzTorchify():
+    pass 
 
 class NdarrayToPILImage(ZTransformableInterface):    
     def fit(self, X, y=None):
