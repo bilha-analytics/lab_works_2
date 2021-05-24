@@ -36,7 +36,8 @@ class Image:
         try:
             img = FileIO.unpickle( fpath ) 
             return img if size is None else Image.resize_image_dim( img, dim=size)
-        except:
+        except Exception as e:
+            print("SOmething went wrong: ", str(e))
             return None 
 
 

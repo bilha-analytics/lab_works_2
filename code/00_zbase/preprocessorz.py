@@ -143,11 +143,11 @@ class EqualizerDenoiser(ZTransformableInterface, ChainableMixin):
         return O_ 
 
 
-class Tensorfy(ZTransformableInterface):
+class TLTensorfy(ZTransformableInterface):
     normalizer_TL =  transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
 
     def __init__(self, out_dim=(1, 3, 224, 224), rescale_TL=True, enforce_float=True): 
-        super(Tensorfy, self).__init__()  
+        super(TLTensorfy, self).__init__()  
         self.rescale_for_TL = rescale_TL 
         self.out_dim = out_dim 
         self.enforce_float = enforce_float 
@@ -197,6 +197,24 @@ class TorchifyTransformz(ZTransformableInterface):
             O_.append(o_) 
         return O_ 
     
+class Reshapeor(ZTransformableInterface):
+    def __init__(self, newshape):
+        self.newshape = newshape         
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X, y=None):
+        # a. flatten 
+        if isinstance(self.newshape, int) and (self.newshape == -1): 
+            O_ = [x.flatten() for x in X] 
+        # b. reshape to tensor NCHW
+        elif isinstance(self.newshape, int) and (self.newshape == 99): 
+            O_ = [x.reshape( [1,]+list(reversed(x.shape)) ) for x in X] 
+        # c. others on tuple 
+        else:
+            O_ = [x.reshape( self.newshape ) for x in X] 
+        # print( "3D -- input shape: ", X[0].shape, " Vs ", O_[0].shape )
+        return O_
+
 
 class NdarrayToPILImage(ZTransformableInterface):    
     def fit(self, X, y=None):

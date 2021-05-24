@@ -192,7 +192,7 @@ class TrainingManager():
                     epochz=3, 
                     batch_size=64, train_test_val_split=(.7, .2, .1) ): 
 
-        MSG_GSEARCH_RESULTS = "[{:7s}] Best score = {:2.4f} estimator = {:10s} paramz = {:50s}".format ## SCORE, ESTIMATOR, PARAMZ
+        MSG_GSEARCH_RESULTS = "[{:7s}] Best score = {:2.4f} <<< paramz = {:50s}".format ## SCORE, ESTIMATOR, PARAMZ <-- estimator = {:10s}
         ## TODO: fix epochz init cycle Vs training callback etc 
         self.running_loss = 0             
         self.epochz = epochz
@@ -202,11 +202,12 @@ class TrainingManager():
         ## 1. Train-test-val data split and setup dataloader/dispatcher -- sync pytorch and sklearn 
 
         ## 2. grid search on permutationz 
-        # grid_search_resultz = []
+        O_ = []
         for p, (data_p, model_p) in tqdm( enumerate(self.permutationz, 1) ) :
             o = self.run( data_p, model_p, X_data, y_data) 
-            ZReporter.add_log_entry( MSG_GSEARCH_RESULTS(f"{p} {o[0]}", o[1], *[str(i) for i in o[2:]]) ) 
-            
+            O_.append( o ) 
+            ZReporter.add_log_entry( MSG_GSEARCH_RESULTS(f"Perm-{p} {o[0]}",  o[1], *[str(i) for i in o[3:]]) ) # ESTIMATOR = 2
+        return O_   
 
     
     def run(self, data_pipe, model_pipe_pair, X_data, y_data=None): 
