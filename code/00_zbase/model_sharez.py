@@ -210,15 +210,20 @@ class CNNBlocksBuilder:
         #n_out = out_channelz ## TODO: calc backwards @ kern, stride, padding et all <--- n_out = 1 + (n_in +2*p - k)/s ; p padding, k kernel , s stride sizes
         n_out = max( 1, ((out_channelz - 1)*stride) + kernel - (2*padding) ) ## TODO by n_conv_layerz @ > 2
         for i in range(n_conv_layerz):
-            print(n_in, n_out, end="\t")
+            # print(n_in, n_out, end="\t")
             modz.append( nn.Conv2d(n_in, n_out, kernel_size=kernel, stride=stride, padding=padding) ) ## TODO: n_channelz deal, padding options
             n_in = n_out 
             n_out = 1 + ((n_in +(2*padding) - kernel)//stride) ## TODO: calc fwd 
-            print("-->", n_in, n_out) 
-
+            # print("-->", n_in, n_out) 
+        n_out = modz[-1].out_channels 
         ## 2. batchnorm and activation TODO: affine=True/False @ learnable params <--- batchnorm and gradientz calc; should that behere and how to block grad iff
         if batch_norm:
-            modz.append(nn.BatchNorm2d(n_out, affine=batch_norm_affine) ) 
+            print("in ", in_channelz, "out ", out_channelz, 'use: ', n_out)
+            # if in_channelz == 1: # use 1d
+            #     pass ##modz.append(nn.BatchNorm1d(n_out, affine=batch_norm_affine) ) 
+            # else:
+            modz.append(nn.BatchNorm2d(n_out, affine=batch_norm_affine) )
+            # print( modz )  
 
         if activation:
             modz.append( activation( **activation_argz) ) 

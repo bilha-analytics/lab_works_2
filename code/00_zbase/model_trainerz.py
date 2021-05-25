@@ -8,7 +8,8 @@ refactors:
 '''
 
 
-from functools import total_ordering
+import copy
+
 from tqdm import tqdm 
 
 import numpy as np
@@ -23,6 +24,112 @@ from torch import nn
 from torch import optim 
 
 from zreport import ZReporter 
+import model_sharez 
+
+class BasicNNModel(nn.Module):
+    def __init__(self, n_in, n_out, bias=True, conv_modulez=None, 
+                 out_activation=nn.Sigmoid, act_argz={'dim':1},
+                skip=False, 
+                scoring_func = skmetrics.accuracy_score ):
+        super(BasicNNModel, self).__init__()
+
+        self.scoring_func = scoring_func 
+
+        self.skip = skip 
+        self.conv_blocks = nn.ModuleList( conv_modulez )
+
+        ## calc 
+        n_in = self.__get_channels_from_last_conv_pool_block(n_in)  
+        nfc = n_in//2 
+        print(n_in, nfc, n_out)
+        self.fc1 = nn.Linear(n_in, nfc, bias=bias)
+        self.fc2 = nn.Linear(nfc, n_out, bias=bias)
+        self.out_activation = out_activation()#**act_argz) 
+        
+    def __get_channels_from_last_conv_pool_block(self, dim_):
+        ## TODO: refactor 
+        # print(self.conv_blocks) 
+        # print( "++++++++++ ", dim_ )
+        def get_n(mb, ndim): 
+            if isinstance(mb, torch.nn.Conv2d): 
+                h,w,c = ndim 
+                k = mb.kernel_size[0]
+                s = mb.stride[0]
+                p = mb.padding[0] 
+                c_out = mb.out_channels 
+                # print(k, s, p, c_out, ndim)  
+                h = 1 + (h + 2*p - k)/s  
+                w = 1 + (h + 2*p - k)/s  
+                n = (h, w, c_out )
+
+            elif isinstance(mb, torch.nn.MaxPool2d): 
+                h,w,c = ndim 
+                k = mb.kernel_size
+                s = mb.stride ## TODO: if stride != 1 
+                # print('maxpool: ',k,s)
+                # n = ndim // (k*k)
+                n = (h//k, w//k, c) 
+            else: # default = isinstance(mb, nn.Linear):
+                n = ndim 
+            return n
+
+        n_ = dim_
+        for mb in self.conv_blocks:
+            n_ = get_n(mb, n_) 
+            # print(n_, " === ", mb)
+
+        n_ = int(n_[0] * n_[1] * n_[2] )  
+        ## forcing grayscale diff of 132 on 84x84TODO: find where why how etc and fix it
+        if dim_[2] == 1:
+            n_ -= 132 
+        return n_ 
+
+    def forward(self, X_):       
+        # print(len(X_), end="\t:: ")
+        if isinstance(X_, (list, np.ndarray) ):
+            for xi in X_:
+                x_ = self._fwd_xi( torch.tensor(xi) )
+        else:
+            x_ = self._fwd_xi(X_)             
+        return x_
+    
+    def _fwd_xi(self, x):
+        o_ = x.float()  
+        skipped = -1
+        rez = o_ 
+        ## 1. conv_blocks
+        for m in self.conv_blocks:
+            # print(o_.shape, "\t@ ", m)
+            if (not isinstance(m, nn.Conv2d) ) and (skipped < 0): 
+                ## 2. skip/residuals after convz befor pulling et all 
+                if self.skip:## do b4 the first non-conv for now
+                    # print( rez.shape, " SKIP-ADD ", o_.shape)
+                    o_ = o_ + rez 
+                    skipped = 10            
+            o_ = m(o_)
+            if skipped < 0:
+                rez = o_ 
+            
+        ## 3. FC and activation 
+        # print(o_.shape, "\t@ ", m)
+        o_ = o_.flatten(1).reshape(1, -1) # o_.view(-1)
+        o_ = self.fc1( o_ ) 
+        o_ = self.fc2( o_ ) 
+        o_ = self.out_activation(o_)
+        return o_
+    
+
+    def score(self, yhat, y_): 
+        ### AARRRRGGGGGHHHHHH!!!!!!!!!!
+        print("=========SCORING 1========", type(y_), type(yhat), len(y_), len(yhat), y_[0].shape, yhat[0].shape )
+        # return 0.5 
+        yhat = np.array([y.detach().cpu().numpy().flatten().argmax() for y in yhat] ) 
+        # print(yhat)
+        y_ = np.array([y.detach().cpu().numpy().item() for y in y_]) 
+        # print(y_) 
+        # print("=========SCORING 2========", type(y_), type(yhat), y_.shape, yhat.shape )
+        # return np.mean(  np.abs(y_ - yhat )/yhat.max() )# 
+        return self.scoring_func( y_, yhat , normalize=True)
 
 class ModelNetwork(BaseEstimator, ClassifierMixin):
     '''
@@ -44,14 +151,12 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
     def __init__(self, model, 
                 loss_func_argz_tuple=(nn.CrossEntropyLoss, {} ),  
                 optim_func_argz_tuple=(optim.SGD, {'lr':1e-3, 'momentum':.9}), 
-                scoring_func = skmetrics.accuracy_score, 
                 model_trainer_callback=None, ## pass back training results 
                 posttrain_callback=None,
                 use_cuda = False ): 
         self.model = model 
         self.loss_func = loss_func_argz_tuple[0]( **loss_func_argz_tuple[1] )
         self.optim_func = optim_func_argz_tuple[0]( model.parameters(), **optim_func_argz_tuple[1] )  
-        self.scoring_func = scoring_func 
         self.posttrain_callback = posttrain_callback 
         self.model_trainer_callback = model_trainer_callback  
         self.init_cuda(use_cuda) 
@@ -81,13 +186,7 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
         return O_ 
 
     def score(self, yhat, y_):    
-        # print(y_.shape )
-        # print(yhat[0].shape) 
-        yhat = np.array([y.detach().cpu().numpy().max() for y in yhat] ) 
-        y_ = y_.detach().cpu().numpy()
-        # print("=========SCORING 1========", type(y_), type(yhat), y_.shape, yhat.shape )
-        return np.mean(  np.abs(y_ - yhat )/yhat.max() )# 
-        # return self.scoring_func( y_, yhat , normalize=True)
+        return self.model.score(yhat, y_) 
         
 
     ## ==== 2. PyTorch train and eval/predict 
@@ -186,11 +285,29 @@ class TrainingManager():
         '''
             data_pipez : list of data pipelines
             model_pipez : list of (model pipelines and grid search params) tuples 
-        '''            
+        '''         
+        append_permute = lambda d_, m_: self.permutationz.append( ( Pipeline(d_), (Pipeline(m_[0]), m_[1] ) ) )    
         d_, m_ = np.meshgrid( range( len(data_pipez)), range(len(model_pipez)) )
         for x, y in zip(d_, m_):
             for i, j in zip(x, y):
-                self.permutationz.append( (data_pipez[i], model_pipez[j]) ) 
+                if model_pipez[j][0][-1][0] == 'cnn': ## == (('cnn', cnn_kwargz), kwargz)
+                    D_ = data_pipez[i][0] 
+                    c = data_pipez[i][1]
+                    ckwargz = copy.deepcopy( model_pipez[j][0][-1][1]  ) 
+                    ckwargz['n_in'] = (*ckwargz['n_in'], c) 
+                    print(i, ":>>>>> ", c , ckwargz) 
+                    m_ = ModelNetwork( 
+                            BasicNNModel( **ckwargz, 
+                                conv_modulez = model_sharez.CNNBlocksBuilder.conv_block( 
+                                    c, ckwargz['n_out'], kernel=min(c,3) , is_modulelist=False ) ),
+                            model_trainer_callback=self.training_callback ) 
+                    # print("+++++++ ", m_) 
+                    # f"cnn_{i+1}" 
+                    M_ =  (model_pipez[j][0][:-1] + [ ('cnn', m_)],  model_pipez[j][1] )
+                    # print(M_)
+                    append_permute( D_, M_ ) 
+                else:
+                    append_permute( data_pipez[i][0], model_pipez[j] ) 
 
     def training_callback(self, loss, n):
         self.running_loss += loss 
@@ -217,6 +334,7 @@ class TrainingManager():
         ## 2. grid search on permutationz 
         O_ = []
         for p, (data_p, model_p) in tqdm( enumerate(self.permutationz, 1) ) :
+            # print("@@@@: ", p, data_p, " &&&---ON---&&&", model_p[0], " <<< ", model_p[1], "\n") 
             self.running_loss = 0             
             self.current_epoch = 0 
             for e in range(self.epochz):     ##TODO: recheck logic, saving per batch Vs epoch Vs per permute  
@@ -246,7 +364,7 @@ class TrainingManager():
 
         piper = Pipeline([ ('data_pipe', data_pipe),
                             ('model_pipe', model_pipe)])
-        # print(f"============\n{piper}\n{g_paramz}\n==============<<<<")
+        # print(f"============\n{piper}\n{gs_paramz}\n==============<<<<")
 
         gsearch = GridSearchCV(estimator=piper,
                                 param_grid=gs_paramz,
