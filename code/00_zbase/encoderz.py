@@ -11,11 +11,15 @@ from tqdm import tqdm
 import numpy as np
 from skimage.filters import unsharp_mask, gaussian 
 
+from sklearn import metrics as skmetrics 
+
 import torch
 from torch import optim 
 from torch import nn
 import torch.nn.functional as nn_F
 from torchvision import models 
+
+from interfacez import ZTrainableModel 
 
 from model_sharez import TLModelBuilder 
 
@@ -37,19 +41,20 @@ class Encoder(nn.Module):
     @actions:   setup encoder block with given TL model type + forward pass flow 
     '''
     def __init__(self, model_name='vgg16', 
-                    in_channelz=3, out_channelz=512, ## TODO: use these or delete 
+                    in_channelz=3, #out_channelz=512, ## TODO: use these or delete 
                     pretrained=True, freeze_weights=True, classifier_update=None): 
         super(Encoder, self).__init__() 
         
         self.in_channelz = in_channelz ## TODO: img/fmap channel options update in TLModel
-        self.out_channelz  = out_channelz 
+        # self.out_channelz  = out_channelz 
 
         ## TODO: generalize better  
         # 2. https://medium.com/intelligentmachines/implementation-of-class-activation-map-cam-with-pytorch-c32f7e414923 
         #  
 
         ## setup model as pretrained and chuck/update classifier --> classfier_update=None-->delete it
-        model = TLModelBuilder.get_TL_model(model_name, 
+        # classifier_update = out_channelz if classifier_update is None else classifier_update
+        model = TLModelBuilder.get_TL_model(model_name, in_channelz=in_channelz, 
                                             freeze_weights=freeze_weights, 
                                             pretrained=pretrained, 
                                             classifier_update=classifier_update)
@@ -88,15 +93,18 @@ class Encoder(nn.Module):
 
     def forward(self, x):
         pool_indices = [] ## to be passed to decoder for unpooling 
-        x_i = x 
+        output_sizes = [] ##b/c maxunpool can do magic 
+        x_i = x.float()  
         for mod in self.encoder_model:
+            nz = x_i.size() 
             o_ = mod(x_i) 
             if isinstance(o_, tuple) and len(o_) == 2:
                 x_i, idx = o_ 
-                pool_indices.append( idx )
+                pool_indices.append( idx ) 
+                output_sizes.append( nz ) 
             else:
                 x_i = o_ 
-        return x_i, pool_indices 
+        return x_i, pool_indices, output_sizes  
 
 
 class EncoderFused(Encoder): 
@@ -170,14 +178,19 @@ class AutoEncoder(nn.Module):
 
             return nn.ModuleList( modulez ) 
 
-        def forward(self, x, pool_indices):
+        def forward(self, x, pool_indices, output_sizes):
             ## x is a tensor from encoder and pool_indices is the list from encoder
             x_i = x
             k_pool = 0
             rev_pool_indices = list( reversed( pool_indices ) ) 
+            rev_output_sizes = list( reversed( output_sizes ) ) 
+            nz = len(rev_output_sizes) 
             for mod in self.decoder:
                 if isinstance(mod, nn.MaxUnpool2d): #apply indices 
-                    x_i = mod(x_i, indices=rev_pool_indices[k_pool])
+                    # out_size = rev_output_sizes[k_pool+1] if k_pool < nz else None ## no use index 0  and no set for last one ??
+                    x_i = mod(x_i, 
+                                indices=rev_pool_indices[k_pool], 
+                                output_size=rev_output_sizes[k_pool] )
                     k_pool += 1
                 else:
                     x_i = mod(x_i) 
@@ -192,12 +205,24 @@ class AutoEncoder(nn.Module):
         super(AutoEncoder, self).__init__() 
         self.encoder = encoder_model   #Encoder(model, in_channelz=in_channelz, out_channelz=out_channelz, pretrained=pretrained, classifier_update=classifier_update)
         self.decoder = AutoEncoder.Decoder( encoder_model.get_encoder_block ) 
+        self.scoring_func = skmetrics.accuracy_score 
 
     def forward(self, x):
-        x_i, idx = self.encoder(x) 
-        x_i = self.decoder(x_i, idx ) 
+        x_i, idx, outz = self.encoder(x) 
+        x_i = self.decoder(x_i, idx , outz) 
         return x_i
 
     def parameters(self):
         return list(self.encoder.parameters() ) + list(self.decoder.parameters() )
 
+    def score(self, yhat, y_): 
+        ### AARRRRGGGGGHHHHHH!!!!!!!!!!
+        print("=========SCORING 1========", type(y_), type(yhat), len(y_), len(yhat), y_[0].shape, yhat[0].shape )
+        # return 0.5 
+        yhat = np.array([y.detach().cpu().numpy().flatten().argmax() for y in yhat] ) 
+        # print(yhat)
+        y_ = np.array([y.detach().cpu().numpy().item() for y in y_]) 
+        # print(y_) 
+        # print("=========SCORING 2========", type(y_), type(yhat), y_.shape, yhat.shape )
+        # return np.mean(  np.abs(y_ - yhat )/yhat.max() )# 
+        return self.scoring_func( y_, yhat , normalize=True)

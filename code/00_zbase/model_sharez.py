@@ -8,10 +8,11 @@ refactors:
 '''
 
 from sys import builtin_module_names
+from numpy.lib.shape_base import dstack
 from tqdm import tqdm 
 
 import numpy as np
-
+import torch 
 from torch import nn
 from torch.nn import functional as F
 from torchvision import models 
@@ -49,7 +50,7 @@ class TLModelBuilder:
     }
 
     @staticmethod 
-    def get_TL_model(model_name, pretrained=True, 
+    def get_TL_model(model_name, pretrained=True, in_channelz=3, 
                         freeze_weights=True, 
                         classifier_update=None):
         model = TLModelBuilder.supported_models.get(model_name, None) 
@@ -77,6 +78,11 @@ class TLModelBuilder:
         else: # anything else should be nn.Sequential type of sort  OR n_out_channels int 
             # set it to the new object 
             TLModelBuilder._update_classifier_block(model_name, model, classifier_update) 
+
+
+        ## 4. update first conv layer to deal different input channels 
+        if in_channelz != 3:
+            _ = TLModelBuilder._update_conv1(model_name, model, in_channelz) 
 
         return model 
 
@@ -130,6 +136,96 @@ class TLModelBuilder:
         return n 
          
 
+    @staticmethod
+    def _update_conv1(model_name, model, in_channelz):
+        ## weights_for_reinit
+        mb = TLModelBuilder.__get_first_conv_layer(model_name, model)
+        n_out = mb.out_channels 
+        k = mb.kernel_size
+        s = mb.stride
+        p = mb.padding
+        b = mb.bias
+        if not isinstance(b, bool):
+            # print(type(b))
+            b = False #bool(b[0].item() )
+        # print(in_channelz, n_out, k, s, p, b)
+        mb2 = nn.Conv2d(in_channelz, n_out, kernel_size=k, stride=s, padding=p, bias=b) 
+        # print("<<<:: ", mb2)
+                        
+        TLModelBuilder.__set_conv1(model_name, model, mb2) 
+        return TLModelBuilder.__get_first_conv_layer(model_name, model) 
+
+    @staticmethod 
+    def __get_first_conv_layer(model_name, model): 
+        mb = None 
+        if model_name in ['vgg16','squeezenet', ]:
+            mb = getattr(model, 'features', None)[0]
+            
+        elif model_name in ['inception']: ## TODO: inception is different
+            mb = getattr(model, 'Conv2d_1a_3x3', None).conv
+            
+        elif model_name in ['densenet',]: 
+            mb = getattr(model, 'features', None).conv0        
+            
+        elif model_name in ['mobilenet']: 
+            mb = getattr(model, 'features', None)[0][0]
+            
+        else: #default is resnet
+            mb = getattr(model, 'conv1', None)
+        return mb 
+
+
+    @staticmethod
+    def __set_conv1(model_name, model, conv1, require_grad=True): ##TODO: require grad implications 
+        def update_weights(mb, conv1):
+            # print("\n%%%%STARTING:::", mb.state_dict().keys(), "\n" ) #dir(conv1))
+            zweights = mb.state_dict().get('weight', None)
+            zbias = mb.state_dict().get('bias', None)
+            
+            ## 1. weights
+            if zweights is None: ## try densenet setup 
+                zweights = mb.state_dict().get('conv0.weight', None)
+                
+            if zweights is not None:
+                in_c = conv1.in_channels 
+                m_w = zweights[:,0:3,:,:]
+                # print( type(m_w), m_w.shape )
+                m_w = m_w.sum(axis=1)
+                print( "AFTER SUM m_w: ",type(m_w), m_w.shape, "for conv1.in_channels = ", in_c) 
+                m_w = m_w.unsqueeze(1) 
+                m_w = torch.tensor(np.hstack([ m_w for _ in range(in_c) ] )) 
+                print( "New Weights: ", m_w.shape ) 
+                conv1.weight = nn.Parameter(m_w, requires_grad=require_grad)  
+            
+            ## 2. bias 
+            if zbias is not None:
+                conv1.bias=nn.Parameter(zbias, requires_grad=require_grad) 
+            
+            print( f"DONE WEIGHTS_UPDATE: weights = {zweights is not None}, bias = {zbias is not None }")
+            return conv1
+        
+        if model_name in ['vgg16', 'squeezenet',]:
+            conv1 =update_weights( getattr(model, 'features',None)[0] , conv1)        
+            getattr(model, 'features',None)[0] = conv1 
+            
+        elif model_name in ['inception']: 
+            conv1 =update_weights( getattr(model, 'Conv2d_1a_3x3', None).conv , conv1)        
+            getattr(model, 'Conv2d_1a_3x3', None).conv  = conv1
+            
+        elif model_name in ['densenet',]: ## Densenet is different 
+            conv1 =update_weights( getattr(model, 'features',None), conv1)        
+            setattr( getattr(model, 'features',None), 'conv0', conv1)
+            
+        elif model_name in ['mobilenet']: 
+            conv1 =update_weights( getattr(model, 'features', None)[0][0] , conv1)        
+            getattr(model, 'features', None)[0][0]  =  conv1 
+            
+        else: #default is resnet lilke 
+            # mb = nameof( getattr(model, 'conv1', None))
+            conv1 =update_weights( getattr(model, 'conv1', None), conv1)        
+            setattr(model, 'conv1', conv1)    
+        
+
     ### ===== 2. Menu of classifier blocks << TODO: 
     def get_fc_classifier_block(out_features, in_features, bias=True):
         m_ = nn.Linear(in_features = in_features, out_features= out_features, bias=bias)
@@ -138,52 +234,6 @@ class TLModelBuilder:
 
 
     ### ===== 3. Pretraining Strategy et al TODO: Syncy up ZModel + ModelManager + ModelTrainer
-
-    # def __init__(self, encoder_decoder_model=None ): 
-    #     self.autoencoder = encoder_decoder_model
-    
-    # ## TODO: move train/predict code to some shared manager 
-    # def train(self, X_data, epochz=3,
-    #                         loss_func = nn.MSELoss(),
-    #                         optimizer = optim.SGD, 
-    #                         optimizer_paramz = {'lr':1e-3, 'momentum':.9} 
-    #                         ):
-    #     # 1. go into training mode + setup optimizer
-    #     self.autoencoder.train() 
-    #     optimizer = optimizer( self.autoencoder.parameters(), **optimizer_paramz )  
-
-    #     # 2. run epochs and per item in batch 
-    #     for e in tqdm( range(epochz ) ):
-    #         running_loss = 0
-    #         n_inst = 0
-    #         for x in X_data:
-    #             x_ = x#.float() 
-    #             # a. zero the grads, compute loss, backprop 
-    #             optimizer.zero_grad()
-    #             o_ = self.autoencoder( x_ ) 
-    #             loss = loss_func(o_, x_ ) 
-    #             loss.backward()
-    #             optimizer.step() 
-    #             # b. update aggregates and reporting 
-    #             running_loss += loss.item() 
-            
-    #         print(f"E {e}: loss {running_loss}") 
-
-    # def predict(self, x): 
-    #     x_ = x#.float() 
-    #     # 1. go into eval mode
-    #     self.autoencoder.eval() 
-    #     # 2. run through model 
-    #     o_ = self.autoencoder( x_ )
-    #     # 3. extract top-k 
-    #     O_ = []
-    #     for rec in o_:
-    #         O_.append( rec.detach()  )
-        
-    #     return torch.stack( O_ )  ## why yield??? 
-
-    # def eval(self, ):
-    #     pass 
 
         
 ### === 2. CNN blocks menu - conv (basic, residual, non-activated, ), deconv(opposite per conv), 1x1 bottleneck, 

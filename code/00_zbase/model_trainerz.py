@@ -9,6 +9,7 @@ refactors:
 
 
 import copy
+import pickle 
 
 from tqdm import tqdm 
 
@@ -23,10 +24,12 @@ import torch
 from torch import nn
 from torch import optim 
 
+from interfacez import ZTrainableModel 
+
 from zreport import ZReporter 
 import model_sharez 
 
-class BasicNNModel(nn.Module):
+class BasicNNModel(nn.Module, ZTrainableModel):
     def __init__(self, n_in, n_out, bias=True, conv_modulez=None, 
                  out_activation=nn.Sigmoid, act_argz={'dim':1},
                 skip=False, 
@@ -151,14 +154,18 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
     def __init__(self, model, 
                 loss_func_argz_tuple=(nn.CrossEntropyLoss, {} ),  
                 optim_func_argz_tuple=(optim.SGD, {'lr':1e-3, 'momentum':.9}), 
+                save_checkpoints=None, 
                 model_trainer_callback=None, ## pass back training results 
                 posttrain_callback=None,
                 use_cuda = False ): 
         self.model = model 
         self.loss_func = loss_func_argz_tuple[0]( **loss_func_argz_tuple[1] )
         self.optim_func = optim_func_argz_tuple[0]( model.parameters(), **optim_func_argz_tuple[1] )  
+
+        self.save_checkpoints = save_checkpoints 
         self.posttrain_callback = posttrain_callback 
         self.model_trainer_callback = model_trainer_callback  
+        
         self.init_cuda(use_cuda) 
 
         ## WHAT?? TODO: update __dict__
@@ -177,8 +184,14 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
     ## ==== 1. Sklearn grid search 
     def fit(self, X_, y_=None):
         running_loss = self.train(X_, y_) 
+
+        if self.save_checkpoints: ## save checkpoints 
+            with open(self.save_checkpoints, 'wb') as fd:
+                pickle.dump(self.model, fd ) 
+
         if self.model_trainer_callback: ## pass back running loss to trainer 
             self.model_trainer_callback(running_loss, len(X_) )  
+            
         return self 
 
     def transform(self, X_, y_=None): 
@@ -194,13 +207,13 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
         ## operate on a single instance or a batch X_ = (n,c,h,w) or something like (n, x_i)
         running_loss = 0 
         y_ = [None for _ in range( len(X_) ) ] if y_ is None else y_  ## for case of unsupervised or something 
-        # print( "****** X_ size = ",len(X_) )
+        # print( "****** X_ size = ",len(X_), type(X_) ) # X_[0].shape 
         for x, y in zip(X_, y_):  
             # 0. prep y
             # print('b4: ', y) 
             # y = torch.tensor( [y,], ).reshape(1,1) # [y,] ) ##TODO: fix this for now force #y.reshape(1, *y.shape) 
             # y = y.reshape(1,1,*y.shape )
-            y = y.reshape(1,*y.shape )
+            y = y.reshape(1,*y.shape ) if y is not None else x.float() 
             # print(y.shape, " >>> ", y.item() )
             # print('after: ',y.shape, y)
             # a. zero the grads
@@ -209,11 +222,11 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
             self.model.train()
             # c. forward pass, calc loss, backprop, 
             x = self.model( x ) 
-            # print('@LOSS: ', x.shape, y.shape )
+            # print('@LOSS: x,y', x.shape, y.shape, type(x.flatten()[0].item() ), type(y.flatten()[0].item() ) )
             # print('AS VIEWS: ', x.shape, y.view(-1).reshape(1, -1).shape )
             # loss = self.loss_func(x, y.view(-1).reshape(1,-1) ) #.squeeze(1) )
-            loss = self.loss_func(x, y ) #.squeeze(1) )
-            loss.backward()
+            loss = self.loss_func(x.float(), y ) #.squeeze(1) )
+            loss.backward() 
             self.optim_func.step() 
             # d. update aggregates and reporting 
             running_loss += loss.item() 
@@ -231,6 +244,7 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
             self.model.eval() 
             O_ = self.model(X_) 
             # b. return predictions TODO: who to deal with argmax Vs all now at caller 
+            # print( O_.shape )
         return O_ 
 
 
@@ -333,15 +347,18 @@ class TrainingManager():
 
         ## 2. grid search on permutationz 
         O_ = []
-        for p, (data_p, model_p) in tqdm( enumerate(self.permutationz, 1) ) :
+        # for p, (data_p, model_p) in tqdm( enumerate(self.permutationz, 1) ):
+        p = 1
+        for data_p, model_p in tqdm( self.permutationz ):
             # print("@@@@: ", p, data_p, " &&&---ON---&&&", model_p[0], " <<< ", model_p[1], "\n") 
             self.running_loss = 0             
             self.current_epoch = 0 
-            for e in range(self.epochz):     ##TODO: recheck logic, saving per batch Vs epoch Vs per permute  
+            for e in range(self.epochz) :     ##TODO: recheck logic, saving per batch Vs epoch Vs per permute  
                 self.current_epoch = e+1 
                 o = self.run( data_p, model_p, X_data, y_data) 
             O_.append( o ) 
             ZReporter.add_log_entry( MSG_GSEARCH_RESULTS(f"Perm-{p} {o[0]}",  o[1], *[str(i) for i in o[3:]]) ) # ESTIMATOR = 2
+            p += 1
         return O_   
 
     

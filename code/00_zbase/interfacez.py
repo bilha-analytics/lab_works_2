@@ -9,6 +9,8 @@ refactors: TODO: use data loaders
 import abc 
 from sklearn.base import BaseEstimator, TransformerMixin
 
+from sklearn import metrics as skmetrics 
+
 class ZTransformableInterface(metaclass=abc.ABCMeta): 
     '''
     @input:     data list or array, X and y=None (supervised or unsupervised ) 
@@ -32,6 +34,28 @@ class ZTransformableInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def transform(self, X, y=None):
         raise NotImplementedError 
+
+
+class ZTrainableModel(metaclass=abc.ABCMeta):
+    '''
+    avail score method to gridsearch 
+    @actions:   score
+    TODO: requirements/asserts ???? 
+    ''' 
+    ## TODO: fix @ Abstract Vs Mixer Vs Interfeace def Vs ??? 
+    # scoring_func = skmetrics.accuracy_score
+
+    @classmethod
+    def __subclasshook__(cls, subclass):
+        return(
+            hasattr(subclass, 'score') and callable(subclass.score) 
+            or NotImplemented 
+        )
+
+    @abc.abstractmethod
+    def score(self, yhat, y_):
+        raise NotImplementedError 
+
 
 
 class PreprocessorBuilder:
