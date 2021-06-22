@@ -1,0 +1,375 @@
+29-05-2021 19:33:52: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:33:52: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:34:18: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:42: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:42: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:10: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:42: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:10: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:37: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:42: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:10: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:37: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:37:02: [Perm-5 svm loader__lbp_red_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 19:35:15: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:35:42: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:10: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:36:37: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:37:02: [Perm-5 svm loader__lbp_red_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 19:37:26: [Perm-6 svm loader__lbp_red_yellow_darks_blue_green] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:38: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:38: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:05: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:38: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:05: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:32: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:38: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:05: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:32: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:59: [Perm-5 svm loader__lbp_red_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 19:42:11: [Perm-1 svm loader__origi] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:42:38: [Perm-2 svm loader__green] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:05: [Perm-3 svm loader__lbp_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:32: [Perm-4 svm loader__lbp_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'rbf'}
+29-05-2021 19:43:59: [Perm-5 svm loader__lbp_red_yellow_darks] Best score = 0.5000 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 19:44:25: [Perm-6 svm loader__lbp_red_yellow_darks_blue_green] Best score = 0.5667 <<< paramz = {'model_pipe__svm__C': 1, 'model_pipe__svm__kernel': 'linear'}
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:16: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:16: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:17: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:16: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:17: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:09:19: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:16: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:17: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:09:19: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:09:22: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:09:05: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:07: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:10: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:12: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:13: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:16: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:17: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:09:19: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:09:22: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:09:22: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:58: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:58: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:59: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:58: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:59: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:10:01: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:58: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:59: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:10:01: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:10:03: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:09:48: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:09:50: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:09:53: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:09:54: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:09:55: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:09:58: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:09:59: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:10:01: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:10:03: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:10:03: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:09: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:09: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:41:10: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:09: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:41:10: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:41:12: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:09: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:41:10: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:41:12: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:41:14: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:40:59: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:00: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:03: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:04: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:06: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:09: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:41:10: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:41:12: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:41:14: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:41:14: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:42:04: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:42:04: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:42:05: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:42:04: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:42:05: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:42:07: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:42:04: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:42:05: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:42:07: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:42:10: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:41:54: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:41:56: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:41:58: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:41:59: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:42:01: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:42:04: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:42:05: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:42:07: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:42:10: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:42:10: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:49: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:49: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:43:50: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:49: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:43:50: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:43:52: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:49: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:43:50: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:43:52: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:43:55: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:43:38: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:43:40: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:43:43: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:43:44: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:43:46: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:43:49: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:43:50: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:43:52: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:43:55: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:43:55: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:55: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:55: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:44:56: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:55: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:44:56: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:44:57: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:55: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:44:56: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:44:57: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:45:00: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:44:45: Train Epoch 1/3: Loss:         19.7532/19.753195 (current/running) 	n =    15
+29-05-2021 20:44:46: Train Epoch 1/3: Loss:         20.5324/20.532444 (current/running) 	n =    15
+29-05-2021 20:44:49: Train Epoch 1/3: Loss:         38.3142/38.314246 (current/running) 	n =    30
+29-05-2021 20:44:50: Train Epoch 2/3: Loss:         19.9389/19.938896 (current/running) 	n =    15
+29-05-2021 20:44:52: Train Epoch 2/3: Loss:         20.0982/20.098235 (current/running) 	n =    15
+29-05-2021 20:44:55: Train Epoch 2/3: Loss:         38.4102/38.410241 (current/running) 	n =    30
+29-05-2021 20:44:56: Train Epoch 3/3: Loss:         19.5017/19.501671 (current/running) 	n =    15
+29-05-2021 20:44:57: Train Epoch 3/3: Loss:         19.4227/19.422703 (current/running) 	n =    15
+29-05-2021 20:45:00: Train Epoch 3/3: Loss:         37.3372/37.337174 (current/running) 	n =    30
+29-05-2021 20:45:00: [Perm-1 cnn loader__origi] Best score = nan <<< paramz = {}                                                

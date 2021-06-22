@@ -23,18 +23,19 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 import torch 
 from torch import nn
 from torch import optim 
+import torch.nn.functional as TF 
 
 from interfacez import ZTrainableModel 
 
 from zreport import ZReporter 
 import model_sharez 
 
-class BasicNNModel(nn.Module, ZTrainableModel):
+class BasicCNNModel(nn.Module, ZTrainableModel):
     def __init__(self, n_in, n_out, bias=True, conv_modulez=None, 
                  out_activation=nn.Sigmoid, act_argz={'dim':1},
                 skip=False, 
                 scoring_func = skmetrics.accuracy_score ):
-        super(BasicNNModel, self).__init__()
+        super(BasicCNNModel, self).__init__()
 
         self.scoring_func = scoring_func 
 
@@ -114,14 +115,21 @@ class BasicNNModel(nn.Module, ZTrainableModel):
                 rez = o_ 
             
         ## 3. FC and activation 
-        # print(o_.shape, "\t@ ", m)
+        ## TODO: hack @ downsampling beef --- pad with zeros if don't match 
+        # ex_n_in = self.fc1.in_features 
+        # diff_n = max(0, (len(o_.flatten()) - ex_n_in) ) 
+        # if diff_n > 0:
+        #     o_ = TF.pad(input=o_, pad=(0,0,0,diff_n), mode='constant', value=0)
+        #     o_ = o_[:-diff_n] 
+        # else:
+        #     o_ = o_[:ex_n_in] ## TODO: who's causing this mess!!!! arghhh 33x33 becomes 35x35 at some point and kills everything after that 
+        # print(o_.shape, "\?t@ ", m)
         o_ = o_.flatten(1).reshape(1, -1) # o_.view(-1)
         o_ = self.fc1( o_ ) 
         o_ = self.fc2( o_ ) 
         o_ = self.out_activation(o_)
         return o_
     
-
     def score(self, yhat, y_): 
         ### AARRRRGGGGGHHHHHH!!!!!!!!!!
         print("=========SCORING 1========", type(y_), type(yhat), len(y_), len(yhat), y_[0].shape, yhat[0].shape )
@@ -210,12 +218,12 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
         # print( "****** X_ size = ",len(X_), type(X_) ) # X_[0].shape 
         for x, y in zip(X_, y_):  
             # 0. prep y
-            # print('b4: ', y) 
+            # print('b4: ', y, type(y) )  
             # y = torch.tensor( [y,], ).reshape(1,1) # [y,] ) ##TODO: fix this for now force #y.reshape(1, *y.shape) 
             # y = y.reshape(1,1,*y.shape )
-            y = y.reshape(1,*y.shape ) if y is not None else x.float() 
-            # print(y.shape, " >>> ", y.item() )
-            # print('after: ',y.shape, y)
+            # y = y.reshape(1,*y.shape ) if y is not None else x.float() 
+            y = torch.tensor(y).unsqueeze(0) if y is not None else x.float() 
+            # print('after: ',y.shape, y, y.item())
             # a. zero the grads
             self.optim_func.zero_grad() 
             # b. set model to training mode
@@ -225,7 +233,8 @@ class ModelNetwork(BaseEstimator, ClassifierMixin):
             # print('@LOSS: x,y', x.shape, y.shape, type(x.flatten()[0].item() ), type(y.flatten()[0].item() ) )
             # print('AS VIEWS: ', x.shape, y.view(-1).reshape(1, -1).shape )
             # loss = self.loss_func(x, y.view(-1).reshape(1,-1) ) #.squeeze(1) )
-            loss = self.loss_func(x.float(), y ) #.squeeze(1) )
+            loss = self.loss_func(x.float(), y.reshape(-1)  ) #.squeeze(1) )
+            # print("@LOSS: ", type(loss) )
             loss.backward() 
             self.optim_func.step() 
             # d. update aggregates and reporting 
@@ -309,9 +318,9 @@ class TrainingManager():
                     c = data_pipez[i][1]
                     ckwargz = copy.deepcopy( model_pipez[j][0][-1][1]  ) 
                     ckwargz['n_in'] = (*ckwargz['n_in'], c) 
-                    print(i, ":>>>>> ", c , ckwargz) 
+                    # print(i, ":>>>>> ", c , ckwargz) 
                     m_ = ModelNetwork( 
-                            BasicNNModel( **ckwargz, 
+                            BasicCNNModel( **ckwargz, 
                                 conv_modulez = model_sharez.CNNBlocksBuilder.conv_block( 
                                     c, ckwargz['n_out'], kernel=min(c,3) , is_modulelist=False ) ),
                             model_trainer_callback=self.training_callback ) 

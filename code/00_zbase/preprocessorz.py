@@ -179,7 +179,7 @@ class TorchifyTransformz(ZTransformableInterface):
     normalizer_TL =  transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
     # augmentor = transforms.
 
-    def __init__(self, transformz_composed): 
+    def __init__(self, transformz_composed=None):  
         super(TorchifyTransformz, self).__init__()  
         self.transformz_composed = transformz_composed 
 
@@ -189,11 +189,14 @@ class TorchifyTransformz(ZTransformableInterface):
     def transform(self, X_, y=None):
         # O_ = [ self.normalizer_TL(torch.tensor(o_.astype('f').reshape(self.out_dim) ) ) for x_ in X_]
         O_ = []
-        for x_ in X_:
-            o_ = x_.copy() 
-            ## TorchVision transformz op on PIL.Image or ndarray 
-            # o_ = torch.tensor( np.transpose(o_, (2, 0, 1)) )  # TODO: confirm order ##tensorvision: C, H, W --> np.transpose C.H.W --> 012 
-            o_ = self.transformz_composed( o_ ) 
+        for x_ in X_: ##TODO: per instance Vs per batch operate ?????? 
+            # print(type(x_), x_.shape )
+            ## a. make tensors AND reshape to NCHW 
+            o_ = torch.tensor(np.transpose(x_) ).unsqueeze(0)
+            # print("in shape: ", x_.shape, " out shape, ", o_.shape )
+            ## b. TorchVision transformz op on PIL.Image or ndarray etc E.G. for augmentation with TorchVision.transforms            
+            if self.transformz_composed:
+                o_ = self.transformz_composed( o_ ) 
             O_.append(o_) 
         return O_ 
     
